@@ -417,10 +417,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
           Container(
             child: widget.pickerModel.layoutProportions()[0] > 0
                 ? _renderColumnView(
-                    ValueKey(widget.pickerModel.currentLeftIndex() *
-                            1000 *
-                            widget.pickerModel.currentMiddleIndex() *
-                            100 +
+                    ValueKey(widget.pickerModel.currentMiddleIndex() * 100 +
                         widget.pickerModel.currentRightIndex()),
                     theme,
                     widget.pickerModel.leftStringAtIndex,
@@ -442,10 +439,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
           Container(
             child: widget.pickerModel.layoutProportions()[1] > 0
                 ? _renderColumnView(
-                    ValueKey(widget.pickerModel.currentLeftIndex() *
-                            1000 *
-                            widget.pickerModel.currentMiddleIndex() *
-                            100 +
+                    ValueKey(widget.pickerModel.currentLeftIndex() * 1000 +
                         widget.pickerModel.currentRightIndex()),
                     theme,
                     widget.pickerModel.middleStringAtIndex,
