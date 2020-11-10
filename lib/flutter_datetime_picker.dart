@@ -200,6 +200,40 @@ class DatePicker {
                 minTime: minTime,
                 locale: locale)));
   }
+
+  ///
+  /// Display time picker bottom sheet.
+  ///
+  static Future<DateTime> showTimePickerWithMinuteStep(
+    BuildContext context, {
+    bool showTitleActions: true,
+    bool showSecondsColumn: true,
+    DateChangedCallback onChanged,
+    DateChangedCallback onConfirm,
+    DateCancelledCallback onCancel,
+    locale: LocaleType.en,
+    DateTime currentTime,
+    DatePickerTheme theme,
+    int step,
+  }) async {
+    return await Navigator.push(
+        context,
+        new _DatePickerRoute(
+            showTitleActions: showTitleActions,
+            onChanged: onChanged,
+            onConfirm: onConfirm,
+            onCancel: onCancel,
+            locale: locale,
+            theme: theme,
+            barrierLabel:
+                MaterialLocalizations.of(context).modalBarrierDismissLabel,
+            pickerModel: TimePickerModelWithMinuteStep(
+              currentTime: currentTime,
+              locale: locale,
+              showSecondsColumn: showSecondsColumn,
+              step: step,
+            )));
+  }
 }
 
 class _DatePickerRoute<T> extends PopupRoute<T> {

@@ -433,6 +433,107 @@ class TimePickerModel extends CommonPickerModel {
 }
 
 //a time picker model
+class TimePickerModelWithMinuteStep extends CommonPickerModel {
+  bool showSecondsColumn;
+  int step;
+
+  TimePickerModelWithMinuteStep({
+    DateTime currentTime,
+    LocaleType locale,
+    this.showSecondsColumn: true,
+    this.step = 1,
+  }) : super(locale: locale) {
+    this.currentTime = currentTime ?? DateTime.now();
+    _setMiddleList();
+    _currentLeftIndex = this.currentTime.hour;
+    _currentMiddleIndex = (this.currentTime.minute ~/ step);
+    _currentRightIndex = this.currentTime.second;
+  }
+
+  List<int> generateMinutes() {
+    final result = <int>[];
+    for (var i = 0; i < 60; i) {
+      result.add(i);
+      i += step;
+    }
+    return result;
+  }
+
+  void _setMiddleList() {
+    final minutes = generateMinutes();
+    this.middleList =
+        List.generate(minutes.length, (index) => digits(minutes[index], 2));
+  }
+
+  @override
+  String leftStringAtIndex(int index) {
+    if (index >= 0 && index < 24) {
+      return digits(index, 2);
+    } else {
+      return null;
+    }
+  }
+
+  @override
+  String middleStringAtIndex(int index) {
+    if (index >= 0 && index < middleList.length) {
+      return middleList[index];
+    } else {
+      return null;
+    }
+  }
+
+  @override
+  String rightStringAtIndex(int index) {
+    if (index >= 0 && index < 60) {
+      return digits(index, 2);
+    } else {
+      return null;
+    }
+  }
+
+  @override
+  String leftDivider() {
+    return ":";
+  }
+
+  @override
+  String rightDivider() {
+    if (showSecondsColumn)
+      return ":";
+    else
+      return "";
+  }
+
+  @override
+  List<int> layoutProportions() {
+    if (showSecondsColumn)
+      return [1, 1, 1];
+    else
+      return [1, 1, 0];
+  }
+
+  @override
+  DateTime finalTime() {
+    return currentTime.isUtc
+        ? DateTime.utc(
+            currentTime.year,
+            currentTime.month,
+            currentTime.day,
+            _currentLeftIndex,
+            int.parse(middleList[_currentMiddleIndex]),
+            _currentRightIndex)
+        : DateTime(
+            currentTime.year,
+            currentTime.month,
+            currentTime.day,
+            _currentLeftIndex,
+            int.parse(middleList[_currentMiddleIndex]),
+            _currentRightIndex);
+  }
+}
+
+//a time picker model
 class Time12hPickerModel extends CommonPickerModel {
   Time12hPickerModel({DateTime currentTime, LocaleType locale})
       : super(locale: locale) {
