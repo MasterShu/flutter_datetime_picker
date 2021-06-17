@@ -3,13 +3,13 @@ library flutter_datetime_picker;
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/src/datetime_picker_theme.dart';
-import 'package:flutter_datetime_picker/src/date_model.dart';
-import 'package:flutter_datetime_picker/src/i18n_model.dart';
+import 'src/datetime_picker_theme.dart';
+import 'src/date_model.dart';
+import 'src/i18n_model.dart';
 
-export 'package:flutter_datetime_picker/src/datetime_picker_theme.dart';
-export 'package:flutter_datetime_picker/src/date_model.dart';
-export 'package:flutter_datetime_picker/src/i18n_model.dart';
+export 'src/datetime_picker_theme.dart';
+export 'src/date_model.dart';
+export 'src/i18n_model.dart';
 
 typedef DateChangedCallback(DateTime time);
 typedef DateCancelledCallback();
@@ -189,14 +189,14 @@ class DatePicker {
   static Future<DateTime> showMSDatePicker(
     BuildContext context, {
     bool showTitleActions: true,
-    DateTime minTime,
-    DateTime maxTime,
-    DateChangedCallback onChanged,
-    DateChangedCallback onConfirm,
-    DateCancelledCallback onCancel,
+    DateTime? minTime,
+    DateTime? maxTime,
+    DateChangedCallback? onChanged,
+    DateChangedCallback? onConfirm,
+    DateCancelledCallback? onCancel,
     locale: LocaleType.en,
-    DateTime currentTime,
-    DatePickerTheme theme,
+    DateTime? currentTime,
+    DatePickerTheme? theme,
   }) async {
     return await Navigator.push(
         context,
@@ -223,13 +223,13 @@ class DatePicker {
     BuildContext context, {
     bool showTitleActions: true,
     bool showSecondsColumn: true,
-    DateChangedCallback onChanged,
-    DateChangedCallback onConfirm,
-    DateCancelledCallback onCancel,
+    DateChangedCallback? onChanged,
+    DateChangedCallback? onConfirm,
+    DateCancelledCallback? onCancel,
     locale: LocaleType.en,
-    DateTime currentTime,
-    DatePickerTheme theme,
-    int step,
+    DateTime? currentTime,
+    DatePickerTheme? theme,
+    int step = 1,
   }) async {
     return await Navigator.push(
         context,

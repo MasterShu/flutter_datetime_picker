@@ -1,5 +1,5 @@
-import 'package:flutter_datetime_picker/src/date_format.dart';
-import 'package:flutter_datetime_picker/src/i18n_model.dart';
+import 'date_format.dart';
+import 'i18n_model.dart';
 import 'datetime_util.dart';
 import 'dart:math';
 
@@ -450,8 +450,8 @@ class TimePickerModelWithMinuteStep extends CommonPickerModel {
   int step;
 
   TimePickerModelWithMinuteStep({
-    DateTime currentTime,
-    LocaleType locale,
+    DateTime? currentTime,
+    LocaleType? locale,
     this.showSecondsColumn: true,
     this.step = 1,
   }) : super(locale: locale) {
@@ -478,7 +478,7 @@ class TimePickerModelWithMinuteStep extends CommonPickerModel {
   }
 
   @override
-  String leftStringAtIndex(int index) {
+  String? leftStringAtIndex(int index) {
     if (index >= 0 && index < 24) {
       return digits(index, 2);
     } else {
@@ -487,7 +487,7 @@ class TimePickerModelWithMinuteStep extends CommonPickerModel {
   }
 
   @override
-  String middleStringAtIndex(int index) {
+  String? middleStringAtIndex(int index) {
     if (index >= 0 && index < middleList.length) {
       return middleList[index];
     } else {
@@ -496,7 +496,7 @@ class TimePickerModelWithMinuteStep extends CommonPickerModel {
   }
 
   @override
-  String rightStringAtIndex(int index) {
+  String? rightStringAtIndex(int index) {
     if (index >= 0 && index < 60) {
       return digits(index, 2);
     } else {
@@ -799,14 +799,14 @@ class DateTimePickerModel extends CommonPickerModel {
 }
 
 class DatePickerDMY extends CommonPickerModel {
-  DateTime maxTime;
-  DateTime minTime;
+  late DateTime maxTime;
+  late DateTime minTime;
 
   DatePickerDMY(
-      {DateTime currentTime,
-      DateTime maxTime,
-      DateTime minTime,
-      LocaleType locale})
+      {DateTime? currentTime,
+      DateTime? maxTime,
+      DateTime? minTime,
+      LocaleType? locale})
       : super(locale: locale) {
     this.maxTime = maxTime ?? DateTime(2049, 12, 31);
     this.minTime = minTime ?? DateTime(1970, 1, 1);
@@ -981,7 +981,7 @@ class DatePickerDMY extends CommonPickerModel {
   }
 
   @override
-  String leftStringAtIndex(int index) {
+  String? leftStringAtIndex(int index) {
     if (index >= 0 && index < leftList.length) {
       return leftList[index];
     } else {
@@ -990,7 +990,7 @@ class DatePickerDMY extends CommonPickerModel {
   }
 
   @override
-  String middleStringAtIndex(int index) {
+  String? middleStringAtIndex(int index) {
     if (index >= 0 && index < middleList.length) {
       return middleList[index];
     } else {
@@ -999,7 +999,7 @@ class DatePickerDMY extends CommonPickerModel {
   }
 
   @override
-  String rightStringAtIndex(int index) {
+  String? rightStringAtIndex(int index) {
     if (index >= 0 && index < rightList.length) {
       return rightList[index];
     } else {
@@ -1007,7 +1007,7 @@ class DatePickerDMY extends CommonPickerModel {
     }
   }
 
-  String _localeYear() {
+  String? _localeYear() {
     if (locale == LocaleType.zh || locale == LocaleType.jp) {
       return '年';
     } else if (locale == LocaleType.ko) {
@@ -1017,13 +1017,13 @@ class DatePickerDMY extends CommonPickerModel {
     }
   }
 
-  String _localeMonth(int month) {
+  String? _localeMonth(int month) {
     if (locale == LocaleType.zh || locale == LocaleType.jp) {
       return '$month月';
     } else if (locale == LocaleType.ko) {
       return '$month월';
     } else {
-      List monthStrings = i18nObjInLocale(locale)['monthLong'];
+      List monthStrings = i18nObjInLocale(locale)['monthLong']  as List<String>;
       return monthStrings[month - 1];
     }
   }
